@@ -7,7 +7,7 @@ import {findByDataTestAttribute, testStore} from './../Utils';
 const setUp = (intitialState = {}) => {
     const store = testStore(intitialState);
     const wrapper = shallow(<App store={store} />).childAt(0).dive(); //use console to see what we get in this shallow.
-    console.log(wrapper.debug());
+    // console.log(wrapper.debug());
     return wrapper;
 }
 
