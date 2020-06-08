@@ -14,8 +14,7 @@ export const checkProps = (component, expectedProps) => {
     return propsErrors;
 }
 
-//integration testing
-
+//dummy store for integration testing
 export const testStore = (intialState) => {
     const createStoreWithMiddleWares = applyMiddleware(...middlewares)(createStore);
     return createStoreWithMiddleWares(rootReducer,intialState);
