@@ -17,11 +17,29 @@ const tempArr = [{
   onLineStatus : true
 }]
 
+const initialState = {
+  btnState  :false
+};
 
 class App extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {...initialState}
+  }
+
+  updateBtnStatus() {
+    this.setState(previousState => ({'btnState' : !previousState.btnState})) ;
+  }
+
   fetchData() {
     this.props.fetchPosts();
+    this.updateBtnStatus();
+  }
+
+  //this method is made to learn tetsing on method that returns a value.
+  exampleMethod_returnsAValue(number) {
+    return number+1;
   }
 
   render() {
@@ -35,7 +53,9 @@ class App extends Component {
           <Header />
           <section className="main">
             <Headline header="POST" desc="Click the button to render Posts" tempArr = {tempArr} />
-            <SharedButton {...configButton} />
+            {this.props.posts.length === 0 && 
+              <SharedButton {...configButton} />
+            }
             {this.props.posts.length ? 
               this.props.posts.map((element,index) =>  <ListItem key={index} title={element.title} desc={element.desc} />
               ): null

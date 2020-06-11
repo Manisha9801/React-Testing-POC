@@ -8,8 +8,8 @@ describe('SharedButton Component', () => {
     describe('Checking PropTypes' , () => {
         it('Sould NOT throw warning' , () => {
             const expectedProps = {
-                buttonText : 'Example Button Text',
-                emitEvent : () => {
+                buttonText : 'Example Button Text',  //jest allows to create a mock function.
+                emitEvent : () => {   
 
                 }
             };
@@ -20,11 +20,12 @@ describe('SharedButton Component', () => {
 
     describe('Renders',() => {
         let wrapper;
+        let mockFunc ;
         beforeEach(() => {
+            mockFunc = jest.fn();
             const props = {
                 buttonText : 'Example Button Text',
-                emitEvent : () => {
-                }
+                emitEvent : mockFunc
             }
             wrapper = shallow(<SharedButton {...props} />);
         });
@@ -33,6 +34,13 @@ describe('SharedButton Component', () => {
             const button = findByDataTestAttribute(wrapper,'buttonComponent');
             expect(button.length).toBe(1);
         });
-    })
+
+        it("Should emit callback on click event" , () => {
+            const button = findByDataTestAttribute(wrapper,'buttonComponent');
+            button.simulate('click');
+            const callback = mockFunc.mock.calls.length;
+            expect(callback).toBe(1);
+        })
+    });
 })
 
