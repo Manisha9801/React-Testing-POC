@@ -26,5 +26,17 @@ describe('App Component',() => {
     it('Should render without errors' ,() => {
         const component = findByDataTestAttribute(wrapper,'appComponent');
         expect(component.length).toBe(1); 
+    });
+
+    it('updateBtnStatus method should update the state as expected' , () => {
+        const classInstance = wrapper.instance();   //it creates an instance of the class so that we can fire function on it.
+        classInstance.updateBtnStatus();
+        const newState = classInstance.state.btnState;
+        expect(newState).toBe(true);
+    });
+    it('exampleMethod_returnsAValue to return a increased value', () => {
+        const classInstance = wrapper.instance();
+        const valueReturned = classInstance.exampleMethod_returnsAValue(2);
+        expect(valueReturned).toBe(3);
     })
 })
